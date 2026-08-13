@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools==82.0.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hello_world"
+dynamic = ["version"]
+description = "A simple hello world FastAPI app"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.13.13,<3.14.0"
+dependencies = [
+    "fastapi==0.136.3",
+    "uvicorn==0.48.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest==9.0.3",
+    "httpx==0.28.1",
+    "flake8==7.3.0",
+    "pylint==4.0.5",
+]
+dev = [
+    "twine==6.2.0",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "version.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["version*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-rsxX -l --tb=short --junitxml=test-report.xml"
+
+[tool.flake8]
+max-line-length = 120
+exclude = [".git", "__pycache__", "build", "dist", "*.egg-info"]
+
+[tool.pylint.messages_control]
+disable = ["C0114", "C0115", "C0116"]
+
+[tool.pylint.format]
+max-line-length = 120
