@@ -1,0 +1,1 @@
+1. Application fastapi-auto-dp has been successfully deployed!!
